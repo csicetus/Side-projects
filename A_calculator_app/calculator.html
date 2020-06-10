@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>The calculator</title>
+	<style type="text/css">
+		.cal {
+			height: 500px; 
+			width: 30%; 
+			background-color: #f2d9e6; 
+			margin: auto; 
+			text-align: center;
+		}
+
+		.cal ul[title = "one"] {
+			  width: 80%;
+			  column-count: 2; 
+			  column-gap: 1px; 
+			  margin-left: 3%;
+			  margin-right: 3%；
+			  overflow: hidden;
+			  /*margin-left: -10px;*/
+			  /*margin: auto;*/
+			  /*background: #EEEEEE;*/
+			  list-style: none;
+		}
+
+		.cal ul[title = "two"] {
+			  width: 80%;
+			  column-count: 4; 
+			  column-gap: 1px; 
+			  margin-left: 3%;
+			  margin-right: 3%；
+			  overflow: hidden;
+			  /*margin-left: -10px;*/
+			  /*margin: auto;*/
+			  /*background: #EEEEEE;*/
+			  list-style: none;
+		}
+
+		.cal ul[title = "one"] li .btn {
+	        width: 90%;
+		    height:0;
+		    padding-bottom: 20%;
+		    background: #ddccff;
+		    list-style: none;
+	    }
+
+		.cal ul[title = "two"] li .btn {
+	        width: 80%;
+		    height:0;
+		    padding-bottom: 70%;
+		    background: #ddccff;
+		    list-style: none;
+	    }
+
+	</style>
+</head>
+<body>
+	<div class="cal">
+		<p>Jiaqi's calculator</p>
+		<input type="text" class="txt">
+
+		<!-- column-count  表示显示几列 --> 
+		<!-- column-gap    表示两个元素中间间隔距离 -->
+		<ul title="one">
+		    <li>
+		        <input class="btn" type="button" value="AC">
+		    </li>
+		    <li>
+		        <input class="btn" type="button" value="DEL">
+		    </li>
+		</ul>
+		<ul title="two">
+		    <li>
+		    	<input class="btn" type="button" value="7">
+		    </li>
+		    <li>
+		    	<input class="btn" type="button" value="8">
+		    </li>
+		    <li>
+		    	<input class="btn" type="button" value="9">
+		    </li>
+		    <li>
+		    	<input class="btn" type="button" value="+">
+		    </li>
+		</ul>
+		<ul title="two">
+		    <li>
+		    	<input class="btn" type="button" value="5">
+		    </li>
+		    <li>
+		    	<input class="btn" type="button" value="6">
+		    </li>
+		    <li>
+		    	<input class="btn" type="button" value="7">
+		    </li>
+		    <li>
+		    	<input class="btn" type="button" value="-">
+		    </li>
+		</ul>
+		<ul title="two">
+		    <li>
+		    	<input class="btn" type="button" value="1">
+		    </li>
+		    <li>
+		    	<input class="btn" type="button" value="2">
+		    </li>
+		    <li>
+		    	<input class="btn" type="button" value="3">
+		    </li>
+		    <li>
+		    	<input class="btn" type="button" value="*">
+		    </li>
+		</ul>
+		<ul title="two">
+		    <li>
+		    	<input class="btn" type="button" value="=">
+		    </li>
+		    <li>
+		    	<input class="btn" type="button" value="0">
+		    </li>
+		    <li>
+				<input class="btn" type="button" value=".">
+		    </li>
+		    <li>
+				<input class="btn" type="button" value="/">
+		    </li>
+		</ul>
+
+	</div>
+
+<script type="text/javascript">
+	var btn_val = document.getElementsByClassName("btn");
+	var txt_val = document.getElementsByClassName("txt");
+</script>
+</body>
+</html>
