@@ -7,4 +7,5 @@ Basic function: + - * /
 
 Advanced function: DEL AC
 
-# How
+# How - 3 steps
+## 1. Get each buttons' values
