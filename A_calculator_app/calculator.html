@@ -37,7 +37,7 @@
 			  list-style: none;
 		}
 
-		.cal ul[title = "one"] li .btn {
+		.cal ul[title = "one"] li .btn_other {
 	        width: 90%;
 		    height:0;
 		    padding-bottom: 20%;
@@ -58,16 +58,16 @@
 <body>
 	<div class="cal">
 		<p>Jiaqi's calculator</p>
-		<input type="text" class="txt">
+		<input type="text" class="txt" disabled>
 
 		<!-- column-count  表示显示几列 --> 
 		<!-- column-gap    表示两个元素中间间隔距离 -->
 		<ul title="one">
 		    <li>
-		        <input class="btn" type="button" value="AC">
+		        <input class="btn_other" type="button" value="AC">
 		    </li>
 		    <li>
-		        <input class="btn" type="button" value="DEL">
+		        <input class="btn_other" type="button" value="DEL">
 		    </li>
 		</ul>
 		<ul title="two">
@@ -126,12 +126,64 @@
 				<input class="btn" type="button" value="/">
 		    </li>
 		</ul>
-
 	</div>
 
-<script type="text/javascript">
-	var btn_val = document.getElementsByClassName("btn");
-	var txt_val = document.getElementsByClassName("txt");
-</script>
+	<script type="text/javascript">
+		window.onload = function() {
+			var btn_txt = document.getElementsByClassName("btn");
+			var txt = document.getElementsByClassName("txt")[0];
+			var btn_other = document.getElementsByClassName("btn_other");
+			var all_input = [];
+			console.log(btn_txt.length);
+
+			for (var i = 0; i < btn_other.length; i++) {
+				btn_other[i].onclick = function() {
+					if (this.value == "AC") {
+						all_input = [];
+						txt.value = "";
+					} else {
+						// delete str of last position of txt
+						txt.value = txt.value.substr(0, txt.value.length - 1);
+					}
+				}
+			}
+
+
+			// add event to button
+			for (var i = 0; i < btn_txt.length; i++) {
+				// for each button
+				btn_txt[i].onclick = function() {
+					console.log(this.value);
+					// if value is string/operator
+					if (!isNaN(this.value) || this.value == ".") {
+						// if value is digits
+						// if input doesn't contains "."
+						var isContainDot = txt.value.indexOf(".");
+						if (isContainDot == -1 || (isContainDot != -1 && this.value != ".")) {
+							txt.value += this.value;
+						}
+					} 
+					// if value is operator
+					else {
+						// other operators
+						if (this.value != "=") {
+							// console.log("not =");
+							all_input.push(txt.value);
+							all_input.push(this.value);
+							txt.value = "";
+						// operator "="
+						} else {
+							// console.log("is =");
+							all_input.push(txt.value);
+							txt.value = eval(all_input.join(""))
+							all_input = []
+						}
+					}
+				}
+			}
+		}
+		
+
+	</script>
 </body>
 </html>
