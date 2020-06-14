@@ -19,3 +19,7 @@ Basic operators(+-*/): push txt and operators, noted we should clean screen txt
 
 Special operator(=): push txt and calculate result, noted we should clear the store array
 ## 3. Add advance functions
+### Add advance button click event
+Operator(AC): clear txt and store array
+
+Operator(DEL): delete last str of txt
