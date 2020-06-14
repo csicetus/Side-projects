@@ -14,4 +14,8 @@ Basic buttons(0-9): add value to txt
 
 Special button(.): if '.' + '.', do nothing
 ## 2. Deal with operators
+### Expand button click event
+Basic operators(+-*/): push txt and operators, noted we should clean screen txt
+
+Special operator(=): push txt and calculate result, noted we should clear the store array
 ## 3. Add advance functions
