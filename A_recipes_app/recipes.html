@@ -3,16 +3,193 @@
 <head>
 	<title>The Recipe</title>
 	<style type="text/css">
-		
+		.recipe_list {
+            position: absolute; 
+            top: 10%;
+            left: 10%;
+            width: 80%; 
+            height: 100%;
+            background-color: #fdda; 
+		}
+
+		.parent {
+			height: 100%;
+			width: 90%;
+			margin: auto;
+			border: 1px solid #3B6273;
+		}
+
+		.default_child {
+			height: 200px;
+			width: 90%;
+			margin: auto;
+			border: 1px solid #3B6273;
+		}
+
+		.first, .second {
+			width: 45%;
+			float: left;
+            height: 150px;
+            margin-left: 3%;
+            border: 1px solid #3B6273;
+		}
+
+		.btn_each {
+			/*position: absolute;
+		    bottom: 5%;
+		    right: 5%;*/
+		    float: right;
+		    margin: 10px;
+		    color: red;
+		}
+
+		.layer_window { 
+            display: none; 
+            position: absolute; 
+            top: 15%; 
+            left: 25%; 
+            width: 35%; 
+            height: 35%; 
+            padding: 20px; 
+            padding-top: 0px;
+            border: 10px solid orange; 
+            background-color: white; 
+            z-index:1002; 
+            overflow: auto; 
+        } 
+
+        .btn_close {
+        	position: absolute;
+		    top: 5%;
+		    right: 5%;
+        }
+
+        .txt_name {
+        	height: 20px;
+        }
+
+        .txt_ingred {
+	        height: 50px; 
+        }
+
+        .txt_name, .txt_ingred {
+        	color: #ccc;
+	        margin: 0 auto;
+	        overflow: hidden; 
+	        width: 90%; 
+	        font-size: 14px;
+	        line-height: 24px;
+	        outline: none;
+        }
+
+        
+
+        .create {
+        	position: absolute;
+		    bottom: 5%;
+		    right: 5%;
+        }
 	</style>
 </head>
 <body>
-	<button>+</button>
-
-	<script type="text/javascript">
+	<div class="recipe_list">
+		<button class="btn_plus">+</button>
+		<button class="btn_clear">Clear All</button>
+		<div class="parent">
+			<div class="default_child">
+				<div class="first">first</div>
+    			<div class="second">second</div>
+    			<input class="btn_each" type="button" value="Edit">
+    			<input class="btn_each" type="button" value="Delete">
+			</div>
+		</div>
 		
+	</div>
+	<div class="layer_window">
+		<p>Add a Recipe</p>
+		<button class="btn_close">×</button>
+		<p>Recipe</p>
+		<input class="txt_name" type="text" value="Recipe Name">
+		<p>Ingredients</p>
+		<input class="txt_ingred" type="text" value="All ingredients, separated by commas">
+		<button class="create">Create</button>
+	</div>
+	<script type="text/javascript">
+		// add new recipe
+		var btn_plus = document.getElementsByClassName("btn_plus")[0];
+		var btn_close = document.getElementsByClassName("btn_close")[0];
+		var layer = document.getElementsByClassName("layer_window")[0];
+		btn_plus.onclick = function() {
+			layer.style.display = 'block';
+		}
+		btn_close.onclick = function() {
+			layer.style.display = 'none';
+		}
+
+		// add new recipe information
+		var txt_name = document.getElementsByClassName("txt_name")[0];
+		var txt_ingred = document.getElementsByClassName("txt_ingred")[0];
+		txt_add = [txt_name, txt_ingred]
+		for (var i = 0; i < txt_add.length; i++) {
+			txt_add[i].onclick = function() {
+				this.style.color = 'black';
+				this.value = '';
+			}
+		}
+
+
+		// create new recipe
+		var storage = window.localStorage;
+		var recipeBook = []
+		var btn_create = document.getElementsByClassName("create")[0];
+		btn_create.onclick = function() {
+			// add data to local storage
+			layer.style.display = 'none';
+			let cur_recipe = {
+				"Name": txt_name.value,
+				"Ingredients": txt_ingred.value
+			};
+			recipeBook.push(cur_recipe);
+			var cur = JSON.stringify(recipeBook);
+			storage.setItem("recipeBook", cur);
+
+			// close the layer
+			layer.style.display = 'none';
+
+			// add data to new div
+			var parentDiv = document.getElementsByClassName("parent")[0];
+			var childDiv = document.createElement("div");
+			childDiv.className = "default_child";
+			var firstDiv = document.createElement("div");
+			var secondDiv = document.createElement("div");
+			firstDiv.className = "first";
+			secondDiv.className = "second";
+			childDiv.appendChild(firstDiv);
+			childDiv.appendChild(secondDiv);
+			parentDiv.appendChild(childDiv);
+		}
+
+		// clear all data of local storage
+		var btn_clear = document.getElementsByClassName("btn_clear")[0];
+		btn_clear.onclick = function() {
+            storage.clear();
+            // console.log(storage);
+		}
+
+		// edit recipe
+		var btn_each = document.getElementsByClassName("btn_each");
+		for (var i = 0; i < btn_each.length; i++) {
+			btn_each[i].onclick = function() {
+				if (this.value == "Edit") {
+					layer.style.display = 'block';
+				} else {
+					this.parent().remove();
+				}s
+			}
+		}
+		
+
 	</script>
 </body>
 </html>
 
-C:\Program Files\Java\jdk-11.0.7
